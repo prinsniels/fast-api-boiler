@@ -1,22 +1,21 @@
 import uvicorn
 from fastapi import Depends, FastAPI
 from auth import authenticate_request
+from config import config
 
 from routes.v1.crud import router_v1curd
 
-app = FastAPI(dependencies=[Depends(authenticate_request)])
+def build() -> FastAPI:
+    app = FastAPI(
+        dependencies=[Depends(authenticate_request)]
+    )
 
-app.include_router(router=router_v1curd)
-
-
-@app.on_event("startup")
-def startup_event():
-    # this is the place where 
-    #   we chech de database version ... 
-    #   init the cached config file ...
-
-    pass
+    # attach active routes
+    app.include_router(router=router_v1curd)
+    
+    return app
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=5004)
+    config = config()
+    uvicorn.run(build(), host=config.APP_HOST, port=config.APP_PORT)
