@@ -3,17 +3,17 @@ from fastapi import Depends, FastAPI
 
 from auth import authenticate_request
 from config import config
-from routes.v1.crud import route as v1_route
+from routes.probe import route as v1_probe
+from routes.v1 import route as v1_crud
 
 
 def build() -> FastAPI:
-    app = FastAPI(
-        dependencies=[Depends(authenticate_request)]
-    )
+    app = FastAPI()
 
     # attach active routes
-    app.include_router(router=v1_route)
-    
+    app.include_router(router=v1_probe)
+    app.include_router(router=v1_crud, dependencies=[Depends(authenticate_request)])
+
     return app
 
 
