@@ -3,7 +3,7 @@ from fastapi import Depends, FastAPI
 from auth import authenticate_request
 from config import config
 
-from routes.v1.crud import router_v1curd
+from routes.v1.crud import route as v1_route
 
 def build() -> FastAPI:
     app = FastAPI(
@@ -11,7 +11,7 @@ def build() -> FastAPI:
     )
 
     # attach active routes
-    app.include_router(router=router_v1curd)
+    app.include_router(router=v1_route)
     
     return app
 

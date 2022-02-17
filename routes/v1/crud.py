@@ -1,14 +1,14 @@
 from fastapi import APIRouter
 
-router_v1curd = APIRouter(
+route = APIRouter(
     prefix="/v1/crud"
 )
 
-@router_v1curd.get("/")
+@route.get("/")
 async def root():
     return {"message": "Hello World"}
 
 
-@router_v1curd.get("/{name}")
+@route.get("/{name}")
 async def root(name: str):
     return {"message": f"Hello {name}"}
