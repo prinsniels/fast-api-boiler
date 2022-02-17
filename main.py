@@ -1,9 +1,10 @@
 import uvicorn
 from fastapi import Depends, FastAPI
+
 from auth import authenticate_request
 from config import config
-
 from routes.v1.crud import route as v1_route
+
 
 def build() -> FastAPI:
     app = FastAPI(
