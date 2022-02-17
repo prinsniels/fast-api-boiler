@@ -5,7 +5,7 @@ from fastapi import Depends, HTTPException
 from fastapi.security import APIKeyHeader
 from starlette.status import HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED
 
-from config import Config, config
+from src.config import Config, config
 
 api_key = APIKeyHeader(name="X-API-KEY", auto_error=False)
 

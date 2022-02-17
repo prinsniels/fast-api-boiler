@@ -9,15 +9,5 @@ async def items():
 
 
 @route.get("/{id}")
-async def item(id: id):
+async def item(id: str):
     return {"message": f"Hello {id}"}
-
-
-@route.post("/")
-async def item(id: id):
-    return {"message": f"Hello {id}"}
-
-
-@route.delete("/{id}")
-async def drop():
-    pass
