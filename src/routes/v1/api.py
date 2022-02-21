@@ -1,13 +1,17 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from src.db.helper import get_repo
 
-route = APIRouter(prefix="/v1/todo")
+from src.db.item_repo import ItemRepo
+
+route = APIRouter()
 
 
 @route.get("/")
-async def items():
-    return {"message": "Hello World"}
+async def items(repo: ItemRepo = Depends(get_repo(ItemRepo))):
+    return repo.get_all()
 
 
 @route.get("/{id}")
-async def item(id: str):
-    return {"message": f"Hello {id}"}
+async def item_by_id(id: str, repo: ItemRepo = Depends(get_repo(ItemRepo))):
+    print(id)
+    return repo.get_by_id(id)

@@ -1,0 +1,8 @@
+
+# Repository
+-> Interface against repo
+
+# Should allow for DB and InMem repo's
+get_repo: Type[Repo] => Repo
+
+...

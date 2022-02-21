@@ -12,7 +12,11 @@ def build() -> FastAPI:
 
     # attach active routes
     app.include_router(router=v1_probe)
-    # app.include_router(router=v1_crud, dependencies=[Depends(authenticate_request)])
+    app.include_router(
+        router=v1_crud, 
+        prefix="/v1/todo", 
+        #dependencies=[Depends(authenticate_request)]
+    )
 
     return app
 
